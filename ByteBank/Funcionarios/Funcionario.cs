@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ByteBank.Funcionarios
 {
-    public class Funcionario
+    
+    public abstract class Funcionario//o funcionario é uma abstração do conceito de funcionario e agora não é mais possível instanciar (fazer new funcionario(determianr, valor) pois colocamos o abstract)
     {
         //static significa que é uma propriedade estática da classe 
         public static int TotalDeFuncionarios { get; private set; }
@@ -16,7 +17,6 @@ namespace ByteBank.Funcionarios
         public string Nome { get; set; }
         public string CPF { get; set; }
         public double Salario { get; protected set; }//o protected é um modificador de acesso que define que eu posso modificar o salario e seus filhos apenas dentro da classe funcionario. 
-
         
 
         public Funcionario( double salario, string cpf)
@@ -24,23 +24,16 @@ namespace ByteBank.Funcionarios
             TotalDeFuncionarios++;
             CPF = cpf;
             Salario = salario;
+            //Console.WriteLine("Criando Funcionario");
         }
 
-        public virtual void  AumentarSalario()
-        {
-            //Salario = Salario + (Salario * 0.1); --- Jeitos iguais de fazer a mesma coisa. 
-            //Salario = Salario * 1.1;
-            Salario *= 1.1;
+        public abstract void AumentarSalario();
 
-        }
+        //colocando abstract eu digo que cada classe vai ter que instanciar o seu próprio aumentarSalario e GetBonoficação. 
+        //Colocando o virtual eu estou dizendo que o getbonificação possibilita que uma classe filha e mais derivada, mude o comportamento desse método
+        public abstract double GetBonificacao();
+        
 
-        //Colocando esse virtual eu estou dizendo que o getbonificação possibilita que uma classe filha e mais derivada, mude o comportamento desse método
-        public virtual double GetBonificacao()
-        {
-           return Salario *0.10;
-        }
-
-
-
+        //OBS: METODOS ABSTRATOS SÓ PODEM SER CRIADOS DE CLASSES ABSTRATAS
     }
 }

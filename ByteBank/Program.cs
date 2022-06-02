@@ -1,52 +1,65 @@
-﻿using System;
-using ByteBank.Funcionarios;
+﻿using ByteBank.Funcionarios;
+using ByteBank.Sistemas;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace ByteBank
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Bem vindo ao ByteBank");
-            GerenciadorBonificacao gerenciador = new GerenciadorBonificacao();
-            //CTLR + . mostra possíveis correções. 
-            Funcionario Vanessa = new Funcionario(500, "112.232.123 - 12");
-            Vanessa.Nome = "Vanessa Camargo Fashion";
-            Vanessa.CPF = "112.232.123-12";
-           
+            //CalcularBonificacao();
 
-            Funcionario adilson = new Funcionario(1500, "234.323.564-85");
-            adilson.Nome = "adilsinho de xuxu beleza";
-            adilson.CPF = "234.323.564-85";
-     
+            UsarSistema();
 
+            Console.ReadLine();
+        }
+        public static void UsarSistema()
+        {
+            SistemaInterno sistemaInterno = new SistemaInterno();
 
-            Diretor Carlos = new Diretor("122.123.233-45");
-            Carlos.Nome = "Carlos Alberto de Nobrega";
-            Carlos.CPF = "122.123.233-45";
-    
+            Diretor roberta = new Diretor("159.753.398-04");
+            roberta.Nome = "Roberta";
+            roberta.Senha = "123";
 
-            GerenciadorBonificacao funcionario = new GerenciadorBonificacao();
-            
-            //registra o funcionario para fazer parte do plano de bonificação da empresa  
-            gerenciador.Registrar(Vanessa);
-            gerenciador.Registrar(Carlos);
-            gerenciador.Registrar(adilson);
+            GerenteDeConta camila = new GerenteDeConta("326.985.628-89");
+            camila.Nome = "Camila";
+            camila.Senha = "cami";
 
-            Console.WriteLine("Nome: " + Vanessa.Nome);
-            Console.WriteLine("Bonificação: " +  Vanessa.GetBonificacao());
-            Console.WriteLine("Nome: " + Carlos.Nome);
-            Console.WriteLine("Bonificação: " + Carlos.GetBonificacao());
-            Console.WriteLine("Nome: " + adilson.Nome);
-            Console.WriteLine("Bonificação: " + adilson.GetBonificacao());
-
-            Console.WriteLine("total bonificãções: " + gerenciador.GetTotalBonificacao());
-
-            Console.WriteLine("total de funcionarios: " + Funcionario.TotalDeFuncionarios);
-
-            Carlos.AumentarSalario();
-            Console.WriteLine("salario novo do Carlos: " + Carlos.Salario);
+            sistemaInterno.Logar(roberta, "123");
+            sistemaInterno.Logar(camila, "cami");
 
         }
+        public static void CalcularBonificacao()
+        {
+            GerenciadorBonificacao gerenciadorBonificacao = new GerenciadorBonificacao();
+
+            Designer pedro = new Designer("833.222.048-39");
+            pedro.Nome = "Pedro";
+
+            Diretor roberta = new Diretor("159.753.398-04");
+            roberta.Nome = "Roberta";
+
+            Auxiliar igor = new Auxiliar("981.198.778-53");
+            igor.Nome = "Igor";
+
+            GerenteDeConta camila = new GerenteDeConta("326.985.628-89");
+            camila.Nome = "Camila";
+
+            gerenciadorBonificacao.Registrar(pedro);
+            gerenciadorBonificacao.Registrar(roberta);
+            gerenciadorBonificacao.Registrar(igor);
+            gerenciadorBonificacao.Registrar(camila);
+
+            Console.WriteLine("Total de bonificações do mês " +
+            gerenciadorBonificacao.GetTotalBonificacao());
+        }
+
+
     }
 }

@@ -2,7 +2,7 @@
 
 namespace _05__ByteBank
 {
-    internal class Program
+    internal class Program01
     {
         static void Main(string[] args)
         {
